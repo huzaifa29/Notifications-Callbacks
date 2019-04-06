@@ -21,11 +21,13 @@ class ViewController: UIViewController {
         //Default text assign to Label
         self.lblSubscribe.text = "Please subscribe it"
         
-        //
+        //Register Callback
         self.callBack = {
             self.lblSubscribe.text = "You have successfully subscribed by CallBack"
             self.btnSubscribe.setTitle("SUBSCRIBED", for: .normal)
         }
+        
+        //Register Notification Observer
         NotificationCenter.default.addObserver(self, selector: #selector(successfullySubscribed), name: Notification.Name.successfullySubscribedName, object: nil)
     }
     
@@ -35,7 +37,10 @@ class ViewController: UIViewController {
     }
     
     @IBAction func subscribePressed(_ sender: Any) {
+        //Fire Notification event
         NotificationCenter.default.post(name: Notification.Name.successfullySubscribedName, object: nil)
+        
+        //Fire CallBack
 //        self.callBack!()
     }
 }
